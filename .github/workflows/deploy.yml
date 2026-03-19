@@ -24,7 +24,13 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --ignore-scripts
+
+      - name: Copy scram and baremux to public
+        run: |
+          cp -r node_modules/@mercuryworkshop/scramjet/dist public/scram
+          cp -r node_modules/@mercuryworkshop/bare-mux/dist public/baremux
+          cp -r node_modules/@mercuryworkshop/libcurl-transport/dist public/libcurl
 
       - name: Deploy public folder to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3

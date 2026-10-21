@@ -9,9 +9,9 @@
     <title>Scramjet</title>
     <link rel="shortcut icon" content="favicon.webp" />
 
-    <!-- Engine files come from jsDelivr instead of the Node server -->
-    <script src="https://cdn.jsdelivr.net/npm/@mercuryworkshop/scramjet@1.1.0/dist/scramjet.all.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mercuryworkshop/bare-mux@2.1.9/dist/index.js"></script>
+    <!-- Same-origin engine files (must be local for the service worker to work) -->
+    <script src="/scram/scramjet.all.js"></script>
+    <script src="/baremux/index.js"></script>
 
     <link rel="stylesheet" href="index.css" />
     <script src="register-sw.js" defer></script>
@@ -26,8 +26,8 @@
     <div class="flex-center desc left-margin">
       <p>
         Scramjet is an experimental interception based web proxy designed to
-        evade internet censorship, bypass arbitrary web browser restrictions and
-        innovate web proxy technologies.
+        evade internet censorship, bypass arbitrary web browser restrictions
+        and innovate web proxy technologies.
       </p>
     </div>
     <form id="sj-form" class="flex-center">

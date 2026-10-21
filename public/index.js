@@ -1,4 +1,5 @@
 "use strict";
+
 /**
  * @type {HTMLFormElement}
  */
@@ -23,6 +24,7 @@ const errorCode = document.getElementById("sj-error-code");
 // Engine files come from the npm packages, served by jsDelivr:
 const CDN = "https://cdn.jsdelivr.net/npm/@mercuryworkshop";
 const { ScramjetController } = $scramjetLoadController();
+
 const scramjet = new ScramjetController({
   files: {
     wasm: `${CDN}/scramjet@1.1.0/dist/scramjet.wasm.wasm`,
@@ -30,6 +32,7 @@ const scramjet = new ScramjetController({
     sync: `${CDN}/scramjet@1.1.0/dist/scramjet.sync.js`,
   },
 });
+
 scramjet.init();
 
 // The BareMux worker lives on our own site (Workers must be same-origin):
@@ -37,6 +40,7 @@ const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+
   try {
     await registerSW();
   } catch (err) {
@@ -44,10 +48,12 @@ form.addEventListener("submit", async (event) => {
     errorCode.textContent = err.toString();
     throw err;
   }
+
   const url = search(address.value, searchEngine.value);
 
-  // Point the transport at OUR engine — the Rust Worker you deployed:
-  let wispUrl = "wss://wisp-server-workers.athanoffcialemailcopy2.workers.dev/";
+  // Point the transport at YOUR engine — the Rust Worker you deployed:
+  let wispUrl =
+    "wss://wisp-server-workers.athanoffcialemailcopy2.workers.dev/wisp/";
 
   const libcurlUrl = `${CDN}/libcurl-transport@1.5.2/dist/index.mjs`;
   if ((await connection.getTransport()) !== libcurlUrl) {
